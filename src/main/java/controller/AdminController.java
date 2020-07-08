@@ -1,12 +1,12 @@
 package controller;
 
-import model.Admin;
+import model.Food;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import service.FoodService;
 import service.PublicService;
 
 /**
@@ -22,6 +22,8 @@ public class AdminController {
 
     @Autowired
     private PublicService publicService;
+    @Autowired
+    private FoodService foodService;
 
     @ResponseBody
     @RequestMapping("/login")
@@ -34,13 +36,6 @@ public class AdminController {
     }
 
     @ResponseBody
-    @RequestMapping("/Toindex")
-    public ModelAndView ToIndex(){
-
-        return  null;
-    }
-
-    @ResponseBody
     @RequestMapping("/toMenuMange")
     public ModelAndView toMenuMange(){
         ModelAndView model = new ModelAndView();
@@ -49,6 +44,20 @@ public class AdminController {
         return  model;
     }
 
+    @ResponseBody
+    @RequestMapping("/addFood")
+    public Object AddFood(Food food){
+        System.out.println(food);
+        return foodService.Save(food);
+    }
+
+    @ResponseBody
+    @RequestMapping("/delFood")
+    public Object DelFood(String id){
+        System.out.println(id);
+        foodService.Del(id);
+        return toMenuMange();
+    }
 
 
 }

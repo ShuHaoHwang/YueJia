@@ -13,10 +13,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import service.PublicService;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -40,7 +38,9 @@ public class DSTest {
 
     @Test
     public void FoodSql_Test(){
+        System.out.println("开始打印了！！");
         List<Food> t = foodMapper.selectAll();
+
         for(Food x:t){
             System.out.println(x);
         }
@@ -49,6 +49,7 @@ public class DSTest {
 
     @Test
     public void AdminSql_Test(){
+        System.out.println("开始打印了！！");
         Admin a = adminMapper.selectByUsername("ShuHao");
         System.out.println(a);
     }

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import service.PublicService;
 import utils.DigestHelper;
-import utils.UuidUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,8 +40,11 @@ public class PublicServiceImpl implements PublicService {
             rs.put("msg","用户名不存在！");
             rs.put("code",100);
         }else{
-            String Salt = a.getSalt();
+
+            String Salt = a.getSalt();//获取密码盐值
             String rpw = DigestHelper.md5(DigestHelper.md5(Salt) + DigestHelper.md5(pwd + Salt));
+
+
             if(a.getPassword().equals(rpw)){
                 System.out.println("密码正确！");
                 rs.put("msg","登录成功！");

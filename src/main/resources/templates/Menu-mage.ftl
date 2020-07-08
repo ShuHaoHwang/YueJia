@@ -12,10 +12,12 @@
         <link href="/css/vendor/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
         <link href="/css/vendor/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
 
+
         <!-- App css -->
         <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="/css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -239,36 +241,9 @@
                                 
                                 
                                     <tbody>
-                                        <#--<tr>-->
-                                            <#--<td><b>#0121</b></td>-->
-                                            <#--<td>-->
-                                                <#--<img src="/assets/images/users/avatar-2.jpg" alt="contact-img" height="36" title="contact-img" class="rounded-circle float-left mr-2" />-->
-                                                <#--<p class="mb-0 font-weight-bold"><a href="javascript: void(0);">默笙</a></p>-->
-                                                <#--<span class="font-13 d-none d-sm-block">3494490@qq.com</span>-->
-                                            <#--</td>-->
-
-                                            <#--<td>-->
-                                                <#--155-0000-00000-->
-                                            <#--</td>-->
-
-                                            <#--<td>-->
-                                                <#--河南-->
-                                            <#--</td>-->
-
-                                            <#--<td>-->
-                                                <#--<div class="btn-group dropdown">-->
-                                                    <#--<a href="javascript: void(0);" class="dropdown-toggle arrow-none btn btn-light btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>-->
-                                                    <#--<div class="dropdown-menu dropdown-menu-right">-->
-                                                        <#--<a class="dropdown-item" href="#"><i class="mdi mdi-pencil mr-1 text-muted"></i>编辑联系人</a>-->
-                                                        <#--<a class="dropdown-item" href="#"><i class="mdi mdi-delete mr-1 text-muted"></i>删除</a>-->
-                                                        <#--<a class="dropdown-item" href="#"><i class="mdi mdi-email mr-1 text-muted"></i>发送邮件</a>-->
-                                                    <#--</div>-->
-                                                <#--</div>-->
-                                            <#--</td>-->
-                                        <#--</tr>-->
                                         <#list FoodItem as item>
                                         <tr>
-                                            <td><b>${item.id}</b></td>
+                                            <td id="FoodId"><b>${item.id}</b></td>
                                             <td>
                                                 <img src="${item.img}" alt="contact-img" height="36" title="contact-img" class="rounded-circle float-left mr-2" />
                                                 <p class="mb-0 font-weight-bold"><a href="javascript: void(0);">${item.title}</a></p>
@@ -279,18 +254,18 @@
                                             </td>
 
                                             <td>
-                                                ${item.dec}
+                                                ${item.descr?default("描述")}
                                             </td>
 
                                             <td>
-                                                ${item.type}
+                                                ${item.type?default("类型")}
                                             </td>
                                             <td>
                                                 <div class="btn-group dropdown">
                                                     <a href="javascript: void(0);" class="dropdown-toggle arrow-none btn btn-light btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <a class="dropdown-item" href="#"><i class="mdi mdi-pencil mr-1 text-muted"></i>编辑</a>
-                                                        <a class="dropdown-item" href="#"><i class="mdi mdi-delete mr-1 text-muted"></i>删除</a>
+                                                        <a class="dropdown-item" href="/admin/delFood?id=${item.id}"><i class="mdi mdi-delete mr-1 text-muted"></i>删除</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -339,25 +314,25 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body p-4">
-                        <form role="form">
+                        <form role="form" id="update" method="post">
                             <div class="form-group">
                                 <label for="name">名称</label>
-                                <input type="text" class="form-control" id="name" placeholder="输入菜名[Enter title]">
+                                <input type="text" class="form-control" id="title" name="title" placeholder="输入菜名[Enter title]">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">金额</label>
-                                <input type="number" class="form-control" id="exampleInputEmail1" placeholder="输入金额[Enter price]">
+                                <input type="number" class="form-control" id="price" name="price" placeholder="输入金额[Enter price]">
                             </div>
                             <div class="form-group">
                                 <label for="position">描述</label>
-                                <input type="text" class="form-control" id="position" placeholder="输入描述[Enter dec]">
+                                <input type="text" class="form-control" id="dec" name="descr" placeholder="输入描述[Enter dec]">
                             </div>
                             <div class="form-group">
                                 <label for="company">类型</label>
-                                <input type="text" class="form-control" id="company" placeholder="输入菜类[Enter location]">
+                                <input type="text" class="form-control" id="type" name="type" placeholder="输入菜类[Enter location]">
                             </div>
                             <div class="text-right">
-                                <button type="submit" class="btn btn-success waves-effect waves-light">保存</button>
+                                <button type="submit" class="btn btn-success waves-effect waves-light" id="SaveFood">保存</button>
                                 <button type="button" class="btn btn-light" data-dismiss="modal">取消</button>
                             </div>
                         </form>
@@ -371,14 +346,19 @@
         <script src="/js/vendor.min.js"></script>
         <script src="/js/app.min.js"></script>
         <script src="/js/jQuery.js"></script>
+        <script src="/js/bootstrap.js"></script>
 
         <!-- Plugins js -->
         <script src="/js/vendor/jquery.dataTables.js"></script>
         <script src="/js/vendor/dataTables.bootstrap4.js"></script>
         <script src="/js/vendor/dataTables.responsive.min.js"></script>
         <script src="/js/vendor/responsive.bootstrap4.min.js"></script>
+        <script src="/js/jquery.validate.min.js"></script>
+        <script src="/js/messages_zh.min.js"></script>
+        <script src="/js/layer/layer.js"></script>
 
         <script>
+
             $(document).ready(function() {
                 // Default Datatable
                 $('#basic-datatable').DataTable({
@@ -391,9 +371,59 @@
                         }
                     },
                     "drawCallback": function () {
-                        $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
-                    }
+                        $('.dataTables_paginate > .pagination').addClass('pagination-rounded');}
+
                 });
+
+                $("form").validate({
+                    debug: false,         //只验证，不提交
+                    rules: {
+                        title: {
+                            required: true,
+                        },
+                        price: {
+                            required: true,
+                            minlength: 1,
+                        },
+                    },
+                    messages: {
+                        title: {
+                            required: "请输入菜品名",
+                        },
+                        price: {
+                            required: "请输入金额",}
+                        },errorPlacement: function (error, element) {        //element是jquery对象
+                            element.popover({
+                                content: error[0].innerHTML                  //弹窗显示错误信息
+                            });
+                            element.closest('div').removeClass('has-success').addClass('has-error');//改变输入框的颜色
+                        }, success: function (a, b) {
+                            $(b).parent().removeClass('has-error').addClass('has-success');
+                        },
+                        submitHandler: function (form){
+                            console.log('[开始发起请求]');
+                            console.log('[传输数据为]', $("#update").serialize());
+                            $.ajax({
+                                type: "post",
+                                url: "../admin/addFood",
+                                data: $('#update').serialize(),
+                                success: function (data) {
+                                    console.log('[数据已收到]', data);
+                                    if (data.code == 200) {
+                                        layer.msg(data.msg, {icon: 6});
+                                        setTimeout(function(){
+                                            window.location.href='/admin/toMenuMange';
+                                        },500);
+                                    }
+                                    if (data.code == 100) {
+                                        layer.msg(data.msg);
+                                    }
+                                }
+                        })
+                    }
+
+                });
+
             });
         </script>
 

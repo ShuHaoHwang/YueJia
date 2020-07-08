@@ -2,39 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mapper.FoodMapper" >
   <resultMap id="BaseResultMap" type="model.Food" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="img" property="img" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="dec" property="dec" jdbcType="LONGVARCHAR" />
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="DECIMAL" />
+    <result column="IMG" property="img" jdbcType="VARCHAR" />
+    <result column="DESCR" property="descr" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from food
-    where id = #{id,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="model.Food" >
-    insert into food (id, title, price, 
-      img, type, dec)
+    insert into food (ID, TITLE, PRICE, 
+      IMG, DESCR, TYPE)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
-      #{img,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{dec,jdbcType=LONGVARCHAR})
+      #{img,jdbcType=VARCHAR}, #{descr,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="model.Food" >
     update food
-    set title = #{title,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
-      img = #{img,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
-      dec = #{dec,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    set TITLE = #{title,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=DECIMAL},
+      IMG = #{img,jdbcType=VARCHAR},
+      DESCR = #{descr,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, title, price, img, type, dec
+    select ID, TITLE, PRICE, IMG, DESCR, TYPE
     from food
-    where id = #{id,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, title, price, img, 'type', 'dec'
+    select ID, TITLE, PRICE, IMG, DESCR, TYPE
     from food
   </select>
 </mapper>

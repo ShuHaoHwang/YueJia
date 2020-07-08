@@ -1,5 +1,6 @@
 package model;
 
+
 import lombok.ToString;
 
 import java.math.BigDecimal;
@@ -14,9 +15,9 @@ public class Food {
 
     private String img;
 
-    private String type;
+    private String descr;
 
-    private String dec;
+    private String type;
 
     public Integer getId() {
         return id;
@@ -50,6 +51,14 @@ public class Food {
         this.img = img;
     }
 
+    public String getDescr() {
+        return descr;
+    }
+
+    public void setDescr(String descr) {
+        this.descr = descr;
+    }
+
     public String getType() {
         return type;
     }
@@ -58,11 +67,4 @@ public class Food {
         this.type = type;
     }
 
-    public String getDec() {
-        return dec;
-    }
-
-    public void setDec(String dec) {
-        this.dec = dec;
-    }
 }
